@@ -112,7 +112,14 @@ This project demonstrates the ability to:
 * Apply SQL and Python in real-world scenarios
 
 ---
+## 📂 Dataset
+
+Due to size limitations, the dataset is not included in this repository.
+
+You can download the dataset from the following source:
+
+- https://www.kaggle.com/datasets/mkechinov/ecommerce-events-history-in-cosmetics-shop
 
 ## 📎 Author
 
-Shivam Singh
+Shivam Kumar
