@@ -16,10 +16,48 @@ Analyze user behavior in an e-commerce platform to identify drop-off points in t
 
 * Source: E-commerce Events Dataset (Kaggle)
 * Records: ~3.5 million user interaction events
-* Data includes user actions such as product views, cart additions, and purchases
+* Includes user actions such as product views, cart additions, and purchases
+
+Due to size limitations, the dataset is not included in this repository.
+
+You can download it from:
+https://www.kaggle.com/datasets/mkechinov/ecommerce-events-history-in-cosmetics-shop
+
+---
+## 🧾 SQL Analysis
+
+SQL was used for data extraction and aggregation before performing analysis in Python.
+
+The following SQL queries cover funnel, conversion, revenue, and retention logic.
 
 ---
 
+### Funnel, Conversion & Retention Analysis
+
+```sql
+-- Funnel & Conversion
+SELECT 
+    COUNT(DISTINCT CASE WHEN event_type = 'view' THEN user_id END) AS views,
+    COUNT(DISTINCT CASE WHEN event_type = 'cart' THEN user_id END) AS carts,
+    COUNT(DISTINCT CASE WHEN event_type = 'purchase' THEN user_id END) AS purchases
+FROM events;
+
+-- Retention (Day Difference)
+SELECT 
+    user_id,
+    event_time,
+    MIN(event_time) OVER (PARTITION BY user_id) AS first_visit
+FROM events;
+
+-- Revenue
+SELECT 
+    SUM(price) AS total_revenue
+FROM events
+WHERE event_type = 'purchase';
+
+```
+
+---
 ## 🧠 Approach
 
 ### 1. Data Understanding
@@ -112,14 +150,7 @@ This project demonstrates the ability to:
 * Apply SQL and Python in real-world scenarios
 
 ---
-## 📂 Dataset
-
-Due to size limitations, the dataset is not included in this repository.
-
-You can download the dataset from the following source:
-
-- https://www.kaggle.com/datasets/mkechinov/ecommerce-events-history-in-cosmetics-shop
-
-## 📎 Author
-
+## 📎 Author  
 Shivam Kumar
+
+
